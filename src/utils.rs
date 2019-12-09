@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io;
 use std::io::Read;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Copy, Clone)]
 pub enum Part {
     One,
     Two,

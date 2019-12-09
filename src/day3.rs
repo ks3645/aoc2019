@@ -51,7 +51,11 @@ fn find_min_intersection(wire_one: &Vec<&str>, wire_two: &Vec<&str>, part: Part)
     }
 
     match part {
-        Part::One => intersections.keys().map(|port| port.x.abs() + port.y.abs() ).min().unwrap(),
+        Part::One => intersections
+            .keys()
+            .map(|port| port.x.abs() + port.y.abs())
+            .min()
+            .unwrap(),
         Part::Two => intersections.values().min().unwrap().clone(),
     }
 }
@@ -59,7 +63,7 @@ fn find_min_intersection(wire_one: &Vec<&str>, wire_two: &Vec<&str>, part: Part)
 // uses Cartesian coords for now
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 struct Port {
-    x: i32, 
+    x: i32,
     y: i32,
 }
 
@@ -70,10 +74,22 @@ impl Port {
 
     fn neighbor(&self, dir: &Direction) -> Self {
         match dir {
-            Direction::Up => Port { x: self.x, y: self.y + 1 },
-            Direction::Left => Port{ x:self.x - 1, y: self.y },
-            Direction::Down => Port { x: self.x, y: self.y - 1 },           
-            Direction::Right => Port { x: self.x + 1, y: self.y },           
+            Direction::Up => Port {
+                x: self.x,
+                y: self.y + 1,
+            },
+            Direction::Left => Port {
+                x: self.x - 1,
+                y: self.y,
+            },
+            Direction::Down => Port {
+                x: self.x,
+                y: self.y - 1,
+            },
+            Direction::Right => Port {
+                x: self.x + 1,
+                y: self.y,
+            },
         }
     }
 }

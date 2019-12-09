@@ -5,7 +5,9 @@ pub fn run_program(program: &mut Vec<i32>) {
         let instr: OpCode = program[instr_ptr].into();
 
         match instr {
-            OpCode::Halt => { break 'eval; },
+            OpCode::Halt => {
+                break 'eval;
+            }
             OpCode::Add => {
                 let operand_ptr_one = program[instr_ptr + 1] as usize;
                 let operand_ptr_two = program[instr_ptr + 2] as usize;
@@ -13,15 +15,15 @@ pub fn run_program(program: &mut Vec<i32>) {
                 let result_ptr = program[instr_ptr + 3] as usize;
 
                 program[result_ptr] = program[operand_ptr_one] + program[operand_ptr_two];
-            },
+            }
             OpCode::Mul => {
                 let operand_ptr_one = program[instr_ptr + 1] as usize;
                 let operand_ptr_two = program[instr_ptr + 2] as usize;
 
                 let result_ptr = program[instr_ptr + 3] as usize;
-                
+
                 program[result_ptr] = program[operand_ptr_one] * program[operand_ptr_two];
-            },
+            }
             OpCode::Err => {
                 panic!("1202 program error");
             }
@@ -58,7 +60,7 @@ impl OpCode {
             OpCode::Halt => 1, //maybe not technically correct, but seems to follow from definition of value count as opcode count + parameter count
             _ => {
                 panic!("Undefined value count");
-            },
+            }
         }
     }
 }
@@ -69,7 +71,11 @@ mod tests {
 
     #[test]
     fn test_add() {
-        let mut test_prog = "1,0,0,0,99".trim().split(",").map(|s| s.trim().parse::<i32>().unwrap()).collect();
+        let mut test_prog = "1,0,0,0,99"
+            .trim()
+            .split(",")
+            .map(|s| s.trim().parse::<i32>().unwrap())
+            .collect();
 
         run_program(&mut test_prog);
         assert_eq!(test_prog[..], [2, 0, 0, 0, 99]);
@@ -77,10 +83,13 @@ mod tests {
 
     #[test]
     fn test_mul() {
-        let mut test_prog = "2,4,4,5,99,0".trim().split(",").map(|s| s.trim().parse::<i32>().unwrap()).collect();
+        let mut test_prog = "2,4,4,5,99,0"
+            .trim()
+            .split(",")
+            .map(|s| s.trim().parse::<i32>().unwrap())
+            .collect();
 
         run_program(&mut test_prog);
         assert_eq!(test_prog[..], [2, 4, 4, 5, 99, 9801]);
     }
-  
 }
