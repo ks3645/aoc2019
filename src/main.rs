@@ -10,8 +10,11 @@ macro_rules! day {
 mod utils;
 use utils::Part;
 
+mod intcode_computer;
+
 mod day1;
+mod day2;
 
 fn main() {
-    day!(day1);
+    day!(day1, day2);
 }
