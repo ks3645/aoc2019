@@ -14,7 +14,8 @@ mod intcode_computer;
 
 mod day1;
 mod day2;
+mod day3;
 
 fn main() {
-    day!(day1, day2);
+    day!(day1, day2, day3);
 }
