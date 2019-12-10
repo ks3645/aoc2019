@@ -3,6 +3,8 @@ use crate::utils::Part;
 
 use crate::intcode_computer;
 
+use std::collections::VecDeque;
+
 pub fn solve(part: Part) -> i32 {
     let mut input = String::new();
     utils::read_input_to_string(&mut input, 2).unwrap();
@@ -18,7 +20,7 @@ pub fn solve(part: Part) -> i32 {
             program[1] = 12; //noun
             program[2] = 2; //verb
 
-            intcode_computer::run_program(&mut program);
+            intcode_computer::run_program(&mut program, VecDeque::new());
 
             program[0]
         }
@@ -32,7 +34,7 @@ pub fn solve(part: Part) -> i32 {
                     test_program[1] = i;
                     test_program[2] = j;
 
-                    intcode_computer::run_program(&mut test_program);
+                    intcode_computer::run_program(&mut test_program, VecDeque::new());
 
                     if test_program[0] == 19690720 {
                         noun = i;

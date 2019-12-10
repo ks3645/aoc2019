@@ -28,7 +28,9 @@ fn count_valid_passwords(min: i32, max: i32, part: Part) -> i32 {
 fn is_valid_password(password: String, part: Part) -> bool {
     let chars: Vec<char> = password.chars().collect();
 
-    if chars.len() != 6 { return false; }
+    if chars.len() != 6 {
+        return false;
+    }
 
     let mut prev = None;
     let mut found_double = false;
@@ -44,7 +46,7 @@ fn is_valid_password(password: String, part: Part) -> bool {
                 match part {
                     Part::One => {
                         found_double = true;
-                    },
+                    }
                     Part::Two => {
                         if repeat_count == 1 {
                             found_double = true;
@@ -52,7 +54,7 @@ fn is_valid_password(password: String, part: Part) -> bool {
                     }
                 }
                 repeat_count = 0;
-            }              
+            }
             if digit < prev_digit {
                 is_increasing = false;
             }
@@ -61,11 +63,11 @@ fn is_valid_password(password: String, part: Part) -> bool {
         prev = Some(digit);
     }
 
-    if repeat_count > 0 {    
+    if repeat_count > 0 {
         match part {
             Part::One => {
                 found_double = true;
-            },
+            }
             Part::Two => {
                 if repeat_count == 1 {
                     found_double = true;
